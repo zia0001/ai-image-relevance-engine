@@ -1,7 +1,7 @@
 from enum import Enum
 from typing_extensions import Annotated
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StringConstraints
 
 
 class Category(str, Enum):
@@ -12,35 +12,26 @@ class Category(str, Enum):
         DEER = "deer"
 
 class ImageAnalysis(BaseModel):
-    subject: str
+    subject: Annotated[str, StringConstraints(min_length=3, max_length=30, to_lower=True, strip_whitespace=True)]
     category: Category
-    attributes: list[Annotated[str, Field(min_length=1, max_length=40)]] = Field(min_length=1, max_length=10)
-    caption: str
+    attributes: list[Annotated[str, StringConstraints(min_length=1, max_length=40)]] = Field(min_length=1, max_length=10)
+    caption: Annotated[str, StringConstraints(min_length=10, max_length=500, strip_whitespace=True)] 
     confidence: float = Field(ge=0, le=1)
 
 
 if __name__ == "__main__":
 
     
-    # test = ImageAnalysis(
-    #     subject="deer",
-    #     category=Category.DEER,
-    #     attributes=["brown fur", "wild", "forest"],
-    #     caption="A brown deer standing in a forest",
-    #     confidence=1.1,
-    # )
-    # print(test)
-
     from pydantic import ValidationError
     try:
-        bad = ImageAnalysis(
-            subject="cat",
-            category="cat",  # This will raise a validation error because "cat" is not a valid Category
-            attributes=["","domestic", "playful", "cute", "furry", "small", "agile", "nocturnal", "independent", "curious"],  # This will raise a validation error because there are more than 10 attributes
-            caption="A brown cat standing in a forest",
+        test = ImageAnalysis(
+            subject="Dog",
+            category=Category.DOG,  # This will raise a validation error because "cat" is not a valid Category
+            attributes=["domestic", "playful", "cute", "furry", "small", "agile", "nocturnal", "independent", "curious"],  # This will raise a validation error because there are more than 10 attributes
+            caption="Hanging on the fence",
             confidence=1,
         )
-        print(bad.attributes)
+        print(test)
 
     except ValidationError as e:
         print("Validation failed as expected:")
