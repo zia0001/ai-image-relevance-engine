@@ -10,6 +10,7 @@ class Category(str, Enum):
         DOG = "dog"
         BEAR = "bear"
         DEER = "deer"
+        OTHER = "other"
 
 class ImageAnalysis(BaseModel):
     subject: Annotated[str, StringConstraints(min_length=3, max_length=30, to_lower=True, strip_whitespace=True)]
@@ -26,7 +27,7 @@ if __name__ == "__main__":
     try:
         test = ImageAnalysis(
             subject="Dog",
-            category=Category.DOG,  # This will raise a validation error because "cat" is not a valid Category
+            category=Category.DOG,  
             attributes=["domestic", "playful", "cute", "furry", "small", "agile", "nocturnal", "independent", "curious"],  # This will raise a validation error because there are more than 10 attributes
             caption="Hanging on the fence",
             confidence=1,
