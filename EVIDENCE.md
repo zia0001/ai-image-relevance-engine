@@ -108,3 +108,18 @@ caption
 - A test should break exactly one rule at a time, otherwise the error does not show which rule fired.
 
 
+
+## Phase 1: database and image seeding
+
+### Seed script registers every image once and is safe to re-run
+
+    $ python -m scripts.seed_images
+    54 new image(s) added, 54 file(s) found, 0 already registered
+    $ python -m scripts.seed_images
+    0 new image(s) added, 54 file(s) found, 54 already registered
+
+### All images start as pending
+
+     status  | count
+    ---------+-------
+     pending |    54
