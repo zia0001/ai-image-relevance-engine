@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     # Below this confidence an image is flagged for human review instead of trusted.
     min_confidence: float = 0.6
 
+    # Embeddings. 768 dimensions is plenty for matching and keeps rows small.
+    # The price is an estimate: verify it on the Gemini pricing page.
+    embedding_model: str = "gemini-embedding-001"
+    embedding_dims: int = 768
+    embedding_input_rate: float = 0.15
+
     # Estimated list price, USD per 1M tokens. The free tier is not billed,
     # but we still record what a call would cost. Verify on the Gemini pricing page.
     vision_input_rate: float = 0.75
