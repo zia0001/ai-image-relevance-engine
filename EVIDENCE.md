@@ -123,3 +123,18 @@ caption
      status  | count
     ---------+-------
      pending |    54
+
+## Phase 2: vision batch job (app/vision.py, scripts/run_vision_batch.py)
+
+Ran Gemini over the image set with retries, pacing and per-attempt cost logging.
+
+    images:  53 done, 2 failed (dog_04 network timeout, fox_01 repeated 503; retryable later)
+    ai_calls: 53 ok, 53 api_error (503/504/429/timeouts, all logged), 7 validation_error
+    estimated cost at list price: about $0.11 (actual $0, free tier)
+    categories: bear 5, deer 5, dog 15, fox 9, other 10, wolf 9
+
+Findings:
+- Free tier limits hit in practice: 5 requests/minute/model, a daily cap per model (switched model after the daily cap), and frequent 503 overload errors.
+- Bugs found by running it: SDK-internal retries multiplied with ours and caused silent hangs; an unbounded sleep on a 429 hung the job for 20+ minutes; an httpx.ReadTimeout crashed the whole run. Each was fixed and the job is safe to re-run.
+- The lite model reports confidence 1.00 on almost everything, so needs_review never fired. The mismatch guard must not depend on confidence alone.
+- wolf_4.jpg was labelled coyote (other): a candidate test case for the guard and the eval set.
