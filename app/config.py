@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     # Below this confidence an image is flagged for human review instead of trusted.
     min_confidence: float = 0.6
 
+    # Mismatch guard. 0.77 is a starting point taken from the gap seen in the first matching
+    # run; the eval set will calibrate it.
+    min_similarity: float = 0.74
+    top_k: int = 5
+
     # Embeddings. 768 dimensions is plenty for matching and keeps rows small.
     # The price is an estimate: verify it on the Gemini pricing page.
     embedding_model: str = "gemini-embedding-001"

@@ -155,3 +155,26 @@ Findings:
 - Ranks beyond top-1 are noisy (deer article rank 3 is a wolf at 0.783).
 - Category other covers many animals, so the guard needs a subject check for it.
 - Current articles name the animal, so they are too easy: the real eval set needs ambiguous and mixed articles.
+
+## Phase 3: article analysis (app/article_analysis.py)
+
+Gemini classifies each article into subject, category and confidence, validated by ArticleAnalysis.
+
+    13 of 13 articles analyzed, 13 of 13 categories match the hand labels
+    the two no-image articles came back as category other: bald eagle, carbon markets
+    estimated cost: about $0.022 at list price (actual $0)
+
+## Phase 3: mismatch guard (app/guard.py, app/matching.py, scripts/run_matching.py)
+
+Rules run in order and the first failure rejects with a reason: article confidence, image confidence,
+category, subject (for category other), similarity threshold (0.77, provisional).
+
+    unit tests: 7 passed (tests/test_guard.py)
+    13 articles: wrong-category candidates rejected with reasons, for example
+      deer article, rank 3: category mismatch: article is about deer ('red deer'), image shows wolf ('gray wolf')
+    eagle article: all top candidates rejected -> NO CONFIDENT MATCH
+    carbon markets article: top candidate rejected by the subject rule ('carbon markets' vs 'goat') -> NO CONFIDENT MATCH
+    preview: 13 of 13 as expected (graded with the model's own labels, so NOT the real eval)
+
+Open issue: the golden retriever article's best match scores 0.789 against a 0.77 threshold,
+so the threshold must be calibrated on the larger eval set.

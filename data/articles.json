@@ -1,28 +1,182 @@
 [
-  {"title": "How red foxes survive winter in the Highlands", "expected": "fox",
-   "body": "Red foxes in the Scottish Highlands thicken their coats in autumn and cache food under snow. They hunt voles by pouncing from above, relying on sharp hearing to locate prey beneath the surface."},
-  {"title": "The urban fox: how red foxes adapted to city life", "expected": "fox",
-   "body": "Across European cities, red foxes now den under garden sheds and forage in bins at night. Biologists say their flexible diet and shy habits have let them thrive beside people."},
-  {"title": "Gray wolves return to Yellowstone's valleys", "expected": "wolf",
-   "body": "Since their reintroduction, gray wolves have reshaped Yellowstone, keeping elk on the move and letting willow and aspen recover along the rivers. Packs now roam most of the park."},
-  {"title": "Inside a wolf pack: howls, hierarchy and hunting", "expected": "wolf",
-   "body": "A wolf pack is usually a family led by a breeding pair. Howling keeps the group in contact over long distances, and cooperative hunting lets wolves bring down prey far larger than themselves."},
-  {"title": "Training a border collie puppy in the first twelve weeks", "expected": "dog",
-   "body": "Border collies are fast learners but need structure. Short daily training sessions, early socialisation and plenty of play help a puppy grow into a calm, focused adult dog."},
-  {"title": "Choosing a family dog: golden retriever or corgi?", "expected": "dog",
-   "body": "Golden retrievers are patient and eager to please, while corgis are small, sturdy herders with big personalities. Consider space, grooming and exercise needs before choosing."},
-  {"title": "Caring for a Siberian husky in a warm climate", "expected": "dog",
-   "body": "Huskies were bred for the Arctic, so heat is their main challenge. Owners should exercise them at dawn or dusk, provide shade and water, and never shave the double coat."},
-  {"title": "Brown bears fatten up before hibernation", "expected": "bear",
-   "body": "In autumn, brown bears feed for up to twenty hours a day on salmon, berries and nuts, gaining the fat reserves that carry them through months of winter sleep."},
-  {"title": "Red deer and the autumn rut", "expected": "deer",
-   "body": "Each autumn, red deer stags roar across the moors to defend harems of hinds. The rut is a test of strength and stamina that leaves the males exhausted by winter."},
-  {"title": "Kangaroos of the Australian outback", "expected": "kangaroo",
-   "body": "Red kangaroos can cross open country in huge bounds, storing energy in their tendons. Mobs gather near water at dusk, and females carry young in a pouch for months."},
-  {"title": "Why coyotes are spreading across North America", "expected": "coyote",
-   "body": "Coyotes have expanded from the plains to nearly every US city. Adaptable omnivores, they fill the gap left by wolves and now live in parks, suburbs and industrial areas."},
-  {"title": "Eagles nesting on coastal cliffs", "expected": "none",
-   "body": "Bald eagles return each spring to the same cliff-top nests, adding sticks until the structure weighs hundreds of kilograms. Pairs raise one or two chicks fed on fish."},
-  {"title": "Carbon markets explained for small businesses", "expected": "none",
-   "body": "A carbon market lets companies buy credits that fund emission cuts elsewhere. Small businesses should check credit quality, verification standards and whether prices reflect real reductions."}
+  {
+    "title": "How red foxes survive winter in the Highlands",
+    "expected": "fox",
+    "body": "Red foxes in the Scottish Highlands thicken their coats in autumn and cache food under snow. They hunt voles by pouncing from above, relying on sharp hearing to locate prey beneath the surface."
+  },
+  {
+    "title": "The urban fox: how red foxes adapted to city life",
+    "expected": "fox",
+    "body": "Across European cities, red foxes now den under garden sheds and forage in bins at night. Biologists say their flexible diet and shy habits have let them thrive beside people."
+  },
+  {
+    "title": "Gray wolves return to Yellowstone's valleys",
+    "expected": "wolf",
+    "body": "Since their reintroduction, gray wolves have reshaped Yellowstone, keeping elk on the move and letting willow and aspen recover along the rivers. Packs now roam most of the park."
+  },
+  {
+    "title": "Inside a wolf pack: howls, hierarchy and hunting",
+    "expected": "wolf",
+    "body": "A wolf pack is usually a family led by a breeding pair. Howling keeps the group in contact over long distances, and cooperative hunting lets wolves bring down prey far larger than themselves."
+  },
+  {
+    "title": "Training a border collie puppy in the first twelve weeks",
+    "expected": "dog",
+    "body": "Border collies are fast learners but need structure. Short daily training sessions, early socialisation and plenty of play help a puppy grow into a calm, focused adult dog."
+  },
+  {
+    "title": "Choosing a family dog: golden retriever or corgi?",
+    "expected": "dog",
+    "body": "Golden retrievers are patient and eager to please, while corgis are small, sturdy herders with big personalities. Consider space, grooming and exercise needs before choosing."
+  },
+  {
+    "title": "Caring for a Siberian husky in a warm climate",
+    "expected": "dog",
+    "body": "Huskies were bred for the Arctic, so heat is their main challenge. Owners should exercise them at dawn or dusk, provide shade and water, and never shave the double coat."
+  },
+  {
+    "title": "Brown bears fatten up before hibernation",
+    "expected": "bear",
+    "body": "In autumn, brown bears feed for up to twenty hours a day on salmon, berries and nuts, gaining the fat reserves that carry them through months of winter sleep."
+  },
+  {
+    "title": "Red deer and the autumn rut",
+    "expected": "deer",
+    "body": "Each autumn, red deer stags roar across the moors to defend harems of hinds. The rut is a test of strength and stamina that leaves the males exhausted by winter."
+  },
+  {
+    "title": "Kangaroos of the Australian outback",
+    "expected": "kangaroo",
+    "body": "Red kangaroos can cross open country in huge bounds, storing energy in their tendons. Mobs gather near water at dusk, and females carry young in a pouch for months."
+  },
+  {
+    "title": "Why coyotes are spreading across North America",
+    "expected": "coyote",
+    "body": "Coyotes have expanded from the plains to nearly every US city. Adaptable omnivores, they fill the gap left by wolves and now live in parks, suburbs and industrial areas."
+  },
+  {
+    "title": "Eagles nesting on coastal cliffs",
+    "expected": "none",
+    "body": "Bald eagles return each spring to the same cliff-top nests, adding sticks until the structure weighs hundreds of kilograms. Pairs raise one or two chicks fed on fish."
+  },
+  {
+    "title": "Carbon markets explained for small businesses",
+    "expected": "none",
+    "body": "A carbon market lets companies buy credits that fund emission cuts elsewhere. Small businesses should check credit quality, verification standards and whether prices reflect real reductions."
+  },
+  {
+    "title": "Vulpes vulpes: the secretive canid of hedgerows",
+    "expected": "fox",
+    "body": "Vulpes vulpes is the most widespread wild canid in the northern hemisphere. Its rust-coloured coat, white-tipped tail and vertical pupils make it easy to recognise at dusk along field margins."
+  },
+  {
+    "title": "The lone hunter that howls at the winter moon",
+    "expected": "wolf",
+    "body": "Deep in northern forests, a large grey predator travels in a family pack, calling across frozen valleys. Its howl can carry for kilometres and rallies the group before a hunt."
+  },
+  {
+    "title": "Grizzlies of Alaska: salmon season on the river",
+    "expected": "bear",
+    "body": "Each summer, enormous Ursus arctos bears gather at Alaskan rivers to catch spawning salmon. Dominant males take the best fishing spots while mothers keep their cubs close."
+  },
+  {
+    "title": "The monarch of the glen: stags in the Scottish hills",
+    "expected": "deer",
+    "body": "Red stags carry antlers that can span a metre, shedding and regrowing them every year. Herds graze the high glens in summer and move to sheltered woodland when the weather turns."
+  },
+  {
+    "title": "Hunting with retrievers: a beginner's guide to gundog training",
+    "expected": "dog",
+    "body": "A good retriever marks where a bird falls and brings it back gently. Start with short retrieves of a dummy, reward calm behaviour and build up to water work over several months."
+  },
+  {
+    "title": "Giraffes: how the tallest animal on land drinks",
+    "expected": "giraffe",
+    "body": "A giraffe must spread its front legs wide or kneel to reach water. Special valves in its neck regulate blood flow so it does not black out when it lowers its head."
+  },
+  {
+    "title": "Caring for pet rabbits: housing, diet and health",
+    "expected": "rabbit",
+    "body": "Rabbits need space to run, unlimited hay and fresh vegetables. Their teeth grow continuously, so chew toys matter, and a yearly vaccination protects against common diseases."
+  },
+  {
+    "title": "Why cats knead and other feline habits explained",
+    "expected": "cat",
+    "body": "Kneading is a habit cats carry from kittenhood, when it stimulated milk flow. Purring, slow blinking and head-bumping are also ways a cat shows trust to people it knows."
+  },
+  {
+    "title": "Goat farming for small holdings",
+    "expected": "goat",
+    "body": "Goats are hardy browsers that thrive on rough pasture, but they need secure fencing and shelter from rain. Dairy breeds need milking twice a day and regular hoof trimming."
+  },
+  {
+    "title": "Penguin colonies of the Antarctic peninsula",
+    "expected": "none",
+    "body": "Thousands of penguins crowd the rocky shores each summer to nest and raise chicks. Parents take turns fishing at sea while the other guards the egg from predatory seabirds."
+  },
+  {
+    "title": "Beekeeping for beginners: your first hive",
+    "expected": "none",
+    "body": "Start with a single hive in spring, placed in morning sun and sheltered from wind. Inspect weekly, learn to read the brood pattern, and never open the hive on a cold or rainy day."
+  },
+  {
+    "title": "How to choose hiking boots that last",
+    "expected": "none",
+    "body": "Fit matters more than brand: try boots in the afternoon when feet are swollen, wearing hiking socks. Leather lasts longer but needs care, while synthetic boots dry faster."
+  },
+  {
+    "title": "Protecting your chickens from foxes",
+    "expected": "fox",
+    "body": "Foxes are clever and persistent, and an unsecured coop is an open invitation. Bury wire mesh a foot underground, lock the pop-hole at dusk and avoid leaving feed out overnight."
+  },
+  {
+    "title": "Hedgehogs in the garden: helping a declining species",
+    "expected": "none",
+    "body": "Hedgehog numbers have fallen sharply across Europe. Leave a gap in the fence so they can roam, avoid slug pellets, and keep a pile of leaves and logs as a safe place to hibernate."
+  },
+  {
+    "title": "Wolves and foxes: how two predators share one forest",
+    "expected": "none",
+    "body": "In mixed woodland, wolves hunt deer while foxes take hares and voles. The two rarely meet, but wolves will kill foxes that stray near a kill, shaping where each species can safely feed."
+  },
+  {
+    "title": "From wolf to Chihuahua: how dogs were domesticated",
+    "expected": "none",
+    "body": "Dogs descend from ancient wolves that scavenged near human camps. Over thousands of years, selective breeding produced everything from giant mastiffs to tiny lapdogs."
+  },
+  {
+    "title": "Cunning as a fox: negotiation tactics that work",
+    "expected": "none",
+    "body": "Good negotiators prepare their fallback position, listen more than they talk and never reveal their limit first. These habits matter more in a salary discussion than any clever trick."
+  },
+  {
+    "title": "Sales lessons from the Wolf of Wall Street",
+    "expected": "none",
+    "body": "A famous trader built a brokerage on aggressive cold calling and persuasion scripts. The story is also a warning about the regulation and fraud that ended his career."
+  },
+  {
+    "title": "Coyotes versus wolves: telling the two apart",
+    "expected": "none",
+    "body": "Wolves are larger, with broader snouts and bigger paws, while coyotes are slimmer with pointed muzzles. Both howl, but a wolf's howl is deeper and holds longer notes."
+  },
+  {
+    "title": "Huskies look like wolves but behave like dogs",
+    "expected": "dog",
+    "body": "Siberian huskies share the wolf's thick coat and pale eyes, yet they are fully domestic dogs. They are social, eager to work in a team, and need a lot of daily exercise."
+  },
+  {
+    "title": "A wolf in sheep's clothing: spotting phishing emails",
+    "expected": "none",
+    "body": "Phishing messages imitate banks and colleagues to trick you into clicking a link. Check the sender address, hover over links and never enter passwords on a page you reached from an email."
+  },
+  {
+    "title": "Fawns in spring: why you should never touch a baby deer",
+    "expected": "deer",
+    "body": "Fawns lie still and scentless in tall grass while their mother feeds nearby. Handling one can cause the mother to abandon it, so wildlife rescuers advise leaving it alone."
+  },
+  {
+    "title": "Cubs emerge from winter dens as spring arrives",
+    "expected": "bear",
+    "body": "After months of hibernation, mothers lead newborn cubs out of the den. The cubs weigh little more than a kilogram at birth and stay with their mother for two years."
+  }
 ]

@@ -1,0 +1,37 @@
+EVAL SET: 36 articles (24 have a correct image, 12 have none), 53 images
+
+HEADLINE TOP-1 PRECISION (brief definition: share of ALL 36 articles with the right outcome): 97.2%  (24 right images + 11 right refusals)
+
+WITH GUARD (similarity threshold 0.74, top_k 5)
+  matches returned:      25
+  correct matches:       24
+  TOP-1 PRECISION:       96.0%   (24 of 25 returned matches)
+  recall:                100.0%   (24 of 24 articles with a correct image)
+  correct refusals:      11 of 12 articles with no image
+  FALSE ACCEPT Coyotes versus wolves: telling the two apart: matched wolf_4.jpg (0.815)
+  REFUSED      Eagles nesting on coastal cliffs: [category] category mismatch: article is about other ('bald eagle'), image shows 
+  REFUSED      Carbon markets explained for small businesses: [subject] both are 'other' but the subjects differ: 'carbon markets' vs 'goat'
+  REFUSED      Penguin colonies of the Antarctic peninsula: [category] category mismatch: article is about other ('penguin'), image shows wol
+  REFUSED      Beekeeping for beginners: your first hive: [category] category mismatch: article is about other ('honey bees'), image shows 
+  REFUSED      How to choose hiking boots that last: [image_confidence] image was labelled with low confidence (0.55); a human must review it 
+  REFUSED      Hedgehogs in the garden: helping a declining spe: [category] category mismatch: article is about other ('hedgehog'), image shows fo
+  REFUSED      Wolves and foxes: how two predators share one fo: [article_confidence] article analysis is not confident enough (0.50 < 0.6)
+  REFUSED      From wolf to Chihuahua: how dogs were domesticat: [category] category mismatch: article is about dog ('dogs'), image shows wolf ('g
+  REFUSED      Cunning as a fox: negotiation tactics that work: [category] category mismatch: article is about other ('negotiation tactics'), ima
+  REFUSED      Sales lessons from the Wolf of Wall Street: [category] category mismatch: article is about other ('jordan belfort'), image sh
+  REFUSED      A wolf in sheep's clothing: spotting phishing em: [category] category mismatch: article is about other ('phishing emails'), image s
+
+BASELINE, no guard (top-1 by similarity only)
+  BASELINE WRONG: Cubs emerge from winter dens as spring arrives: expected bear, top-1 was fox_9.jpg (fox/red fox)
+  correct on articles with an image: 23 of 24
+  articles with no image: 0 of 12 refused (it always returns something)
+
+THRESHOLD SWEEP
+  0.70  returned=25  correct=24  precision=96.0%  recall=100.0%  refused_none=11/12
+  0.74  returned=25  correct=24  precision=96.0%  recall=100.0%  refused_none=11/12
+  0.76  returned=25  correct=24  precision=96.0%  recall=100.0%  refused_none=11/12
+  0.77  returned=23  correct=22  precision=95.7%  recall=91.7%  refused_none=11/12
+  0.78  returned=21  correct=20  precision=95.2%  recall=83.3%  refused_none=11/12
+  0.79  returned=19  correct=18  precision=94.7%  recall=75.0%  refused_none=11/12
+  0.80  returned=16  correct=15  precision=93.8%  recall=62.5%  refused_none=11/12
+  0.82  returned=10  correct=10  precision=100.0%  recall=41.7%  refused_none=12/12

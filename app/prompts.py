@@ -11,3 +11,16 @@ Look at the image and return ONE JSON object with exactly these keys:
   tell apart from a similar one (for example fox vs dog vs wolf).
 
 Return only the JSON object, no other text."""
+
+
+ARTICLE_PROMPT = """You are classifying articles so they can be matched with photos of animals.
+Read the article and return ONE JSON object with exactly these keys:
+
+- "subject": the main animal or topic of the article, lowercase, 3-30 characters,
+  for example "red fox" or "carbon markets"
+- "category": one of "fox", "wolf", "dog", "bear", "deer", "other".
+  Use "other" for any animal not in that list, and for articles that are not about an animal.
+- "confidence": number from 0 to 1, how sure you are about subject and category.
+  Use a value below 0.6 if the article covers several animals or the topic is unclear.
+
+Return only the JSON object, no other text."""

@@ -1,0 +1,214 @@
+{
+  "bear_01.jpg": {
+    "category": "bear",
+    "subject": "brown bear"
+  },
+  "bear_02.jpg": {
+    "category": "bear",
+    "subject": "brown bear"
+  },
+  "bear_03.jpg": {
+    "category": "bear",
+    "subject": "brown bear"
+  },
+  "bear_04.jpg": {
+    "category": "bear",
+    "subject": "brown bear"
+  },
+  "bear_05.jpg": {
+    "category": "bear",
+    "subject": "brown bear"
+  },
+  "blurry_01.jpg": {
+    "category": "other",
+    "subject": "black cat"
+  },
+  "blurry_02.jpg": {
+    "category": "other",
+    "subject": "goat"
+  },
+  "blurry_03.jpg": {
+    "category": "other",
+    "subject": "gaur"
+  },
+  "blurry_4.jpg": {
+    "category": "dog",
+    "subject": "brown dog"
+  },
+  "blurry_5.jpg": {
+    "category": "other",
+    "subject": "kangaroo"
+  },
+  "deer_01.jpg": {
+    "category": "deer",
+    "subject": "red deer"
+  },
+  "deer_02.jpg": {
+    "category": "deer",
+    "subject": "mule deer fawn"
+  },
+  "deer_03.jpg": {
+    "category": "deer",
+    "subject": "white-tailed deer"
+  },
+  "deer_04.jpg": {
+    "category": "deer",
+    "subject": "fallow deer"
+  },
+  "deer_05.jpg": {
+    "category": "deer",
+    "subject": "fawn"
+  },
+  "dog_01.jpg": {
+    "category": "dog",
+    "subject": "golden retriever"
+  },
+  "dog_02.jpg": {
+    "category": "dog",
+    "subject": "golden retriever puppy"
+  },
+  "dog_03.jpg": {
+    "category": "dog",
+    "subject": "border collie"
+  },
+  "dog_05.jpg": {
+    "category": "dog",
+    "subject": "golden retriever puppy"
+  },
+  "dog_06.jpg": {
+    "category": "dog",
+    "subject": "corgi"
+  },
+  "dog_07.jpg": {
+    "category": "dog",
+    "subject": "jack russell terrier"
+  },
+  "dog_08.jpg": {
+    "category": "dog",
+    "subject": "dog"
+  },
+  "dog_09.jpg": {
+    "category": "dog",
+    "subject": "border collie"
+  },
+  "dog_10.jpg": {
+    "category": "dog",
+    "subject": "australian shepherd puppy"
+  },
+  "fox_02.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_03.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_10.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_4.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_5.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_6.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_7.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_8.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "fox_9.jpg": {
+    "category": "fox",
+    "subject": "red fox"
+  },
+  "lookalike_01.jpg": {
+    "category": "dog",
+    "subject": "siberian husky"
+  },
+  "lookalike_02.jpg": {
+    "category": "dog",
+    "subject": "white husky"
+  },
+  "lookalike_03.jpg": {
+    "category": "dog",
+    "subject": "white husky"
+  },
+  "lookalike_04.jpg": {
+    "category": "dog",
+    "subject": "dogs"
+  },
+  "lookalike_05.jpg": {
+    "category": "dog",
+    "subject": "husky dog"
+  },
+  "other_01.jpg": {
+    "category": "other",
+    "subject": "giraffe"
+  },
+  "other_02.jpg": {
+    "category": "other",
+    "subject": "rabbit"
+  },
+  "other_03.jpg": {
+    "category": "other",
+    "subject": "cat"
+  },
+  "other_04.jpg": {
+    "category": "other",
+    "subject": "rabbit"
+  },
+  "other_05.jpg": {
+    "category": "other",
+    "subject": "kangaroo"
+  },
+  "wolf_01.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_02.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_10.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_3.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_4.jpg": {
+    "category": "other",
+    "subject": "coyote"
+  },
+  "wolf_5.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_6.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_7.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  },
+  "wolf_8.jpg": {
+    "category": "wolf",
+    "subject": "gray wolves"
+  },
+  "wolf_9.jpg": {
+    "category": "wolf",
+    "subject": "gray wolf"
+  }
+}
