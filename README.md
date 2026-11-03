@@ -110,7 +110,6 @@ Failed images are retried by running the same command again.
   Images and articles were labelled by two models (gemini-3.5-flash and gemini-3.1-flash-lite); the model is
   recorded on every call in `ai_calls`. The lite model reports confidence 1.0 for almost everything, so the
   confidence flag rarely fires (one image flagged).
-- Two images (dog_04, fox_01) failed on repeated overload errors and are not part of the 53.
 - Authorization is a single shared API key, with no per-user accounts.
 
 ## Tests
