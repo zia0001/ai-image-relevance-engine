@@ -19,3 +19,12 @@ Honest record of AI assistance on this capstone. Edit anything here that is not 
 - Free tier forced a model switch (gemini-3.5-flash daily cap), so images and articles were labelled by two models. Recorded per call in ai_calls.model.
 - Image ground truth comes from my own labels (filename prefix plus checking the unusual images by eye), not from the model, so the eval is not circular.
 - I wrote the "expected" article labels before seeing results and did not change them afterwards, even for the debatable coyotes-and-wolves article.
+
+## Later corrections
+- I (the AI) guessed that the baseline's single miss in the eval was the husky article. The output showed it was
+  the "Cubs emerge from winter dens" article (the baseline put a fox first). Guesses about results were replaced
+  by real output every time.
+- The 36 eval articles are short texts written with AI help for this eval, not real blog posts. The expected labels
+  were written before results were seen.
+- A pasted command block was cut off when a terminal closed, so two test files were missing; the state check
+  caught it before the commit.

@@ -1,0 +1,17 @@
+name: ai-image-relevance-engine
+setup: docker compose up -d
+run: uvicorn app.main:app --port 8000
+seed: python -m scripts.seed_images && python -m scripts.seed_articles
+test: python -m pytest -q
+eval: python -m scripts.run_eval
+base_url: http://localhost:8000
+endpoints:
+  - GET /health
+  - GET /posts
+  - GET /posts/1/images
+  - GET /posts/1/check/{image_id}
+  - GET /posts/1/suggestions
+  - GET /suggestions/{id}
+  - GET /costs
+  - POST /posts/{id}/suggestions   # needs X-API-Key
+  - POST /suggestions/{id}/review  # needs X-API-Key
