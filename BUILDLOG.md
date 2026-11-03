@@ -28,3 +28,13 @@ Honest record of AI assistance on this capstone. Edit anything here that is not 
   were written before results were seen.
 - A pasted command block was cut off when a terminal closed, so two test files were missing; the state check
   caught it before the commit.
+- Bad evidence commit: an old uvicorn from an earlier run was still holding port 8000, so a new server could not start.
+  My evidence block then queried the old server, which returned "Not Found" and an empty verdict, and I committed
+  those broken sections (and a stale "37 passed" line) without checking the responses. You noticed the gap, I found
+  the cause (the stray server), fixed it forward in a new commit, and changed the block to validate every response
+  before writing anything to EVIDENCE.md.
+- The budget-guard demo claimed dog_04 and cleared its last_error, so the status endpoint showed a failed image with
+  no error. Retrying the two failed images fixed it. Both new truth labels (dog_04 is a dog, fox_01 is a fox) were
+  confirmed by eye. The eval then covered all 55 images and the headline stayed at 97.2%.
+- Old sections of EVIDENCE.md are kept as dated snapshots, with a note saying where the current numbers are, instead
+  of being rewritten, so the record shows what was true at each step.

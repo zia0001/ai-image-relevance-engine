@@ -264,7 +264,7 @@ Findings:
 
 ## Updates to earlier sections
 - The Category enum later gained "other" (the Phase 1 enum error text above predates that).
-- Images 54 seeded, 53 labelled: dog_04 and fox_01 failed on repeated Gemini 503 overload and were excluded from the eval at this point.
+- 55 images were in the library when the vision job ran (the Phase 1 seeding snapshot above shows 54, taken earlier); 53 labelled: dog_04 and fox_01 failed on repeated Gemini 503 overload and were excluded from the eval at this point.
 - Later update (2026-11-03): both images were retried successfully, embedded, and labelled by hand (dog_04 is a dog, fox_01 is a fox). The eval now covers all 55 images and the headline is unchanged at 97.2%. Sections above this line are snapshots from earlier runs; the current status is in 'Progress tracking' and eval_results.txt.
 
 ## Phase 4: review API (app/main.py, app/repo.py, db/migrations/006_reviews_and_indexes.sql)
@@ -369,3 +369,18 @@ After retrying the two images that had failed on 503 overloads, all 55 are done:
 
     $ python -m pytest -q
     38 passed, 1 warning in 1.11s
+
+## Cost log after the retry (2026-11-03)
+
+Output of `python -m scripts.run_vision_batch` after retrying dog_04 and fox_01, and of `python -m scripts.embed_images`:
+
+    article_analysis api_error         calls= 20 in=      0 out=     0 est=$0.0000
+    article_analysis ok                calls= 36 in=   7820 out=  9727 est=$0.0423
+    article_embedding ok               calls= 36 in=   1981 out=     0 est=$0.0003
+    vision   api_error                 calls= 54 in=      0 out=     0 est=$0.0000
+    vision   ok                        calls= 55 in=  72112 out= 12860 est=$0.1023
+    vision   validation_error          calls=  7 in=   9107 out=   798 est=$0.0098
+    image_embedding ok (after retry)   calls= 55 est_tokens=1281 est=$0.000189
+
+All 55 images now have a successful vision call. Estimated at list price; actual spend is $0 on the free tier.
+The earlier cost table (probe 6) is a snapshot from before the retry.
