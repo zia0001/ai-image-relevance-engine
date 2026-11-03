@@ -9,7 +9,7 @@ from app.db import connect
 from app.guard import check_pair
 from app.matching import match_article
 from app.schemas.api import (CandidateOut, CheckOut, CostRow, CostSummary, DecisionOut, PostOut,
-                             RankedImages, ReviewIn, SuggestionOut)
+                             RankedImages, ReviewIn, SuggestionOut, ImageStatus)
 from app.similarity import cosine
 
 app = FastAPI(title="Image relevance engine")
@@ -145,3 +145,11 @@ def costs():
         rows = repo.cost_summary(conn)
     return CostSummary(rows=[CostRow(**r) for r in rows], total_calls=sum(r["calls"] for r in rows),
                        total_cost_usd=round(sum(r["cost_usd"] for r in rows), 6))
+
+
+@app.get("/images/status", response_model=ImageStatus)
+def images_status():
+    """Progress of the vision batch job: how many images are pending, processing, done or failed."""
+    with connect() as conn:
+        counts, failed = repo.image_status(conn)
+    return ImageStatus(total=sum(counts.values()), counts=counts, failed=failed)

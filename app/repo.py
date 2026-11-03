@@ -86,3 +86,11 @@ def cost_summary(conn: psycopg.Connection):
                   COALESCE(sum(cost_usd), 0)::float8 AS cost_usd
            FROM ai_calls GROUP BY kind, status ORDER BY kind, status"""
     ).fetchall()
+
+
+def image_status(conn: psycopg.Connection):
+    """Progress of the vision job: image counts by status and the images that failed."""
+    counts = {r["status"]: r["n"] for r in conn.execute(
+        "SELECT status, count(*)::int AS n FROM images GROUP BY status").fetchall()}
+    failed = conn.execute("SELECT filename, last_error FROM images WHERE status = 'failed' ORDER BY id").fetchall()
+    return counts, failed

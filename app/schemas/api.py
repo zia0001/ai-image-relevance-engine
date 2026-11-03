@@ -79,3 +79,14 @@ class CostSummary(BaseModel):
     rows: list[CostRow]
     total_calls: int
     total_cost_usd: float
+
+
+class FailedImage(BaseModel):
+    filename: str
+    last_error: str | None
+
+
+class ImageStatus(BaseModel):
+    total: int
+    counts: dict[str, int]
+    failed: list[FailedImage]

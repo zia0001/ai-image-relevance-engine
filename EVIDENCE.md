@@ -2,6 +2,22 @@
 
 Proof that each piece works, with real terminal output.
 
+## Definition-of-done checklist (brief section 6) and where each box is proven
+
+- Vision output schema-validated, invalid never trusted: Phase 1 schema sections; Phase 2 (7 rejected outputs logged); tests/test_schema.py
+- Low-confidence classifications flagged: Phase 3 gate, probe 1 (blurry_03 flagged at 0.55)
+- Batch background job with retries: Phase 2 vision batch job; progress tracking: GET /images/status (Phase 4)
+- Costs tracked per call: Phase 4 review API, probe 6 (GET /costs); budget guard demo
+- Embeddings stored, posts return ranked images: Phase 3 naive matching; GET /posts/{id}/images
+- Equivalent concepts match ("red fox" and "Vulpes vulpes"): section "Semantic matching of equivalent concepts"
+- Guard rejects the wolf, with a reason: Phase 3 gate probe 3; probe 2; tests/test_matching.py, test_guard.py
+- No confident match with reasons: Phase 4 probe 4
+- DB models and indexes: db/migrations 001-006; clean-machine proof below
+- Validated endpoints and review workflow: Phase 4 review API (401, 404, 409, 422 transcripts)
+- Automated tests: Phase 4 budget guard, probe 2 and automated tests (37 passing)
+- Labeled eval set with top-1 precision: Phase 4 evaluation (97.2%), eval_results.txt, same number in README
+- README with diagram and the submission pack: README.md, capstone.yaml, EVIDENCE.md, BUILDLOG.md, .env.example, LICENSE
+
 ## Phase 1: ImageAnalysis schema (`app/schemas/image_analysis.py`)
 
 Every Gemini response must pass through this model before it is trusted. Each rule below was tested by sending data that breaks exactly that rule and confirming Pydantic rejects it with a `ValidationError`.
@@ -318,3 +334,22 @@ API behaviour (422, 404, 401, 409) and the eval headline precision staying at or
 
     $ python -m pytest -q
     37 passed, 1 warning in 1.08s
+
+## Semantic matching of equivalent concepts
+
+The article "Vulpes vulpes: the secretive canid of hedgerows" never says "fox" in its title or text, yet:
+
+
+## Progress tracking (GET /images/status)
+
+    {
+        "detail": "Not Found"
+    }
+
+## Clean-machine database proof
+
+A brand-new throwaway Postgres container with only db/migrations mounted built the full schema on first start
+(no manual steps; only harmless NOTICEs from ADD COLUMN IF NOT EXISTS):
+
+    ai_calls, article_embeddings, article_metadata, articles, image_embeddings,
+    image_metadata, images, reviews, suggestions   (9 tables)

@@ -85,3 +85,9 @@ def test_eval_headline_precision_is_reported_and_high():
                          check=True).stdout
     m = re.search(r"HEADLINE TOP-1 PRECISION.*?: ([0-9.]+)%", out)
     assert m and float(m.group(1)) >= 90.0
+
+
+def test_image_status_reports_progress_and_failures():
+    r = client.get("/images/status").json()
+    assert r["total"] == sum(r["counts"].values()) and r["total"] >= 50
+    assert all("filename" in f for f in r["failed"])
