@@ -178,3 +178,74 @@ category, subject (for category other), similarity threshold (0.77, provisional)
 
 Open issue: the golden retriever article's best match scores 0.789 against a 0.77 threshold,
 so the threshold must be calibrated on the larger eval set.
+
+## Phase 3 gate: acceptance probes 1 and 3
+
+Probe 3, force the wolf onto the fox post (scripts/check_pair.py):
+
+    $ python -m scripts.check_pair "How red foxes survive" wolf_01.jpg
+    Article:   How red foxes survive winter in the Highlands  [fox: red fox]
+    Candidate: wolf_01.jpg  [wolf: gray wolf]  similarity 0.764
+    Verdict:   REJECTED [category]
+    Reason:    category mismatch: article is about fox ('red fox'), image shows wolf ('gray wolf')
+
+The wolf's similarity (0.764) is above the 0.74 threshold, so similarity alone would have accepted it.
+Only the category rule rejects it.
+
+Probe 1, low-confidence images are flagged, not guessed:
+
+     filename    | category | confidence | needs_review
+    -------------+----------+------------+--------------
+     blurry_03.jpg | other  |       0.55 | t
+     blurry_01.jpg | other  |       0.75 | f
+     blurry_5.jpg  | other  |       0.85 | f
+
+    flagged images: 1
+
+## Phase 4: evaluation against human labels (scripts/run_eval.py, full output in eval_results.txt)
+
+Ground truth: article labels written by hand before results were seen (data/articles.json, field expected),
+image labels from my own review (data/image_truth.json). The model's labels never grade themselves.
+
+First eval, 27 easy articles, after fixing the subject rule and lowering the threshold to 0.74:
+
+    precision 100% (21 of 21), recall 100%, refusals 6 of 6; baseline without guard 21 of 21 correct, 0 of 6 refused
+
+That set was too easy, so nine harder articles were added (mixed animals, figurative titles,
+a husky article that mentions wolves, articles that never name the animal).
+
+Second eval, 36 articles (24 have a correct image, 12 have none), threshold 0.74, top_k 5:
+
+    HEADLINE top-1 precision (right outcome on all 36 articles): 97.2%  (24 right images + 11 right refusals)
+    matches returned 25, correct 24, precision 96.0%
+    recall 100.0% (24 of 24 articles with a correct image)
+    correct refusals 11 of 12
+    baseline without the guard: 23 of 24 correct, 0 of 12 refused
+
+Threshold sweep (precision / recall / correct refusals):
+
+    0.70  96.0%  100.0%  11/12
+    0.74  96.0%  100.0%  11/12
+    0.76  96.0%  100.0%  11/12
+    0.77  95.7%   91.7%  11/12
+    0.78  95.2%   83.3%  11/12
+    0.79  94.7%   75.0%  11/12
+    0.80  93.8%   62.5%  11/12
+    0.82 100.0%   41.7%  12/12
+
+Findings:
+- The guard's measured benefit on matchable articles: the baseline put a fox first for "Cubs emerge from winter dens"
+  (the article never says bear); the guard's category check skipped it and returned a bear image.
+- Of 11 correct refusals: 8 by the category rule, 1 by the subject rule, 1 by article confidence
+  ("Wolves and foxes", 0.50), 1 by image confidence (hiking boots matched a flagged blurry image first).
+  None came from the similarity threshold, so the threshold is untested as a safety net.
+- "From wolf to Chihuahua" was refused only because the top 5 candidates were all wolf images; it depends on top_k.
+- My first threshold guess (0.77) lost correct matches (the weakest scored 0.762). 0.74 sits just under it.
+  0.82 would refuse the false accept but discards 58% of correct matches.
+- One false accept, a known limitation: "Coyotes versus wolves" matched wolf_4.jpg (a coyote). The model gave that
+  mixed article confidence 0.90 though the prompt asks for below 0.6 when several animals appear.
+  The expected label was not changed after seeing the result.
+
+## Updates to earlier sections
+- The Category enum later gained "other" (the Phase 1 enum error text above predates that).
+- Images 54 seeded, 53 labelled: dog_04 and fox_01 failed on repeated Gemini 503 overload and are excluded from the eval.
