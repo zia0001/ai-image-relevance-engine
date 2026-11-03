@@ -138,3 +138,20 @@ Findings:
 - Bugs found by running it: SDK-internal retries multiplied with ours and caused silent hangs; an unbounded sleep on a 429 hung the job for 20+ minutes; an httpx.ReadTimeout crashed the whole run. Each was fixed and the job is safe to re-run.
 - The lite model reports confidence 1.00 on almost everything, so needs_review never fired. The mismatch guard must not depend on confidence alone.
 - wolf_4.jpg was labelled coyote (other): a candidate test case for the guard and the eval set.
+
+## Phase 3: naive matching (scripts/try_matching.py)
+
+Cosine similarity between image caption embeddings and article embeddings, no guard yet.
+
+    image-to-image check: fox_02's top 5 neighbours are all foxes (0.91-0.93);
+    nearest wrong answer is wolf_5 at 0.883.
+    category averages: same category 0.82-0.90, different 0.77-0.80 (narrow gap)
+    articles with a matching image: top-1 correct for 11 of 11 (easy set, not the final eval)
+    articles with no matching image: top score 0.752 (eagles) and 0.705 (carbon markets)
+    lowest correct top-1 score: 0.789 (golden retriever article)
+
+Findings:
+- Similarity separates species but only by a narrow margin, so a threshold must be calibrated on labelled data, not guessed.
+- Ranks beyond top-1 are noisy (deer article rank 3 is a wolf at 0.783).
+- Category other covers many animals, so the guard needs a subject check for it.
+- Current articles name the animal, so they are too easy: the real eval set needs ambiguous and mixed articles.
