@@ -115,4 +115,4 @@ Failed images are retried by running the same command again.
 
 ## Tests
 
-    python -m pytest -q     # 37 tests: schema validation, guard, matching, budget guard, API behaviour, eval precision
+    python -m pytest -q     # 38 tests: schema validation, guard, matching, budget guard, API behaviour, eval precision

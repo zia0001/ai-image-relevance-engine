@@ -4,7 +4,9 @@ Before you start (check the post ids with the last command; the fox post is 1 an
 
     docker compose up -d
     source .venv/bin/activate
+    pkill -f 'uvicorn app.main' 2>/dev/null; sleep 1   # stop any old server first
     uvicorn app.main:app --port 8000 > /tmp/api.log 2>&1 &
+    sleep 4
     export KEY=$(grep '^REVIEW_API_KEY=' .env | cut -d= -f2)
     curl -s localhost:8000/posts | python -c "import sys,json; [print(p['id'], p['title']) for p in json.load(sys.stdin)]"
 

@@ -14,7 +14,7 @@ Proof that each piece works, with real terminal output.
 - No confident match with reasons: Phase 4 probe 4
 - DB models and indexes: db/migrations 001-006; clean-machine proof below
 - Validated endpoints and review workflow: Phase 4 review API (401, 404, 409, 422 transcripts)
-- Automated tests: Phase 4 budget guard, probe 2 and automated tests (37 passing)
+- Automated tests: Phase 4 budget guard, probe 2 and automated tests (38 passing)
 - Labeled eval set with top-1 precision: Phase 4 evaluation (97.2%), eval_results.txt, same number in README
 - README with diagram and the submission pack: README.md, capstone.yaml, EVIDENCE.md, BUILDLOG.md, .env.example, LICENSE
 
@@ -335,17 +335,6 @@ API behaviour (422, 404, 401, 409) and the eval headline precision staying at or
     $ python -m pytest -q
     37 passed, 1 warning in 1.08s
 
-## Semantic matching of equivalent concepts
-
-The article "Vulpes vulpes: the secretive canid of hedgerows" never says "fox" in its title or text, yet:
-
-
-## Progress tracking (GET /images/status)
-
-    {
-        "detail": "Not Found"
-    }
-
 ## Clean-machine database proof
 
 A brand-new throwaway Postgres container with only db/migrations mounted built the full schema on first start
@@ -353,3 +342,37 @@ A brand-new throwaway Postgres container with only db/migrations mounted built t
 
     ai_calls, article_embeddings, article_metadata, articles, image_embeddings,
     image_metadata, images, reviews, suggestions   (9 tables)
+
+## Semantic matching of equivalent concepts
+
+The article "Vulpes vulpes: the secretive canid of hedgerows" never says "fox" in its title or text, yet:
+
+    verdict: match - Suggested fox_8.jpg
+    #1 fox_8.jpg 0.832 accepted
+    #2 fox_03.jpg 0.828 accepted
+    #3 fox_02.jpg 0.817 accepted
+
+## Progress tracking (GET /images/status)
+
+    {
+        "total": 55,
+        "counts": {
+            "done": 53,
+            "failed": 2
+        },
+        "failed": [
+            {
+                "filename": "dog_04.jpg",
+                "last_error": null
+            },
+            {
+                "filename": "fox_01.jpg",
+                "last_error": "503: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+            }
+        ]
+    }
+
+## Final test run
+
+    $ python -m pytest -q
+    38 passed, 1 warning in 1.11s
