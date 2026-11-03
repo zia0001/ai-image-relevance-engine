@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     # Below this confidence an image is flagged for human review instead of trusted.
     min_confidence: float = 0.6
 
+    # Budget guard: AI calls stop once the logged estimated spend reaches this many USD.
+    max_budget_usd: float = 1.0
+
+    # Required in the X-API-Key header for write endpoints. Empty means writes are refused.
+    review_api_key: str = ""
+
     # Mismatch guard. 0.77 is a starting point taken from the gap seen in the first matching
     # run; the eval set will calibrate it.
     min_similarity: float = 0.74

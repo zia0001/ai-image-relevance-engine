@@ -40,3 +40,13 @@ def log_call(
         (kind, image_id, article_id, model or settings.vision_model, input_tokens, output_tokens,
          round(cost_usd, 6), status, attempt, error, latency_ms),
     )
+
+
+class BudgetExceeded(RuntimeError):
+    """Raised before an AI call when the logged estimated spend has reached the cap."""
+
+
+def check_budget(conn: psycopg.Connection, settings: Settings) -> None:
+    spent = conn.execute("SELECT COALESCE(sum(cost_usd), 0)::float8 AS spent FROM ai_calls").fetchone()["spent"]
+    if spent >= settings.max_budget_usd:
+        raise BudgetExceeded(f"estimated spend ${spent:.4f} has reached the budget ${settings.max_budget_usd}")

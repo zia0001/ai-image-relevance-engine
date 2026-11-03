@@ -249,3 +249,72 @@ Findings:
 ## Updates to earlier sections
 - The Category enum later gained "other" (the Phase 1 enum error text above predates that).
 - Images 54 seeded, 53 labelled: dog_04 and fox_01 failed on repeated Gemini 503 overload and are excluded from the eval.
+
+## Phase 4: review API (app/main.py, app/repo.py, db/migrations/006_reviews_and_indexes.sql)
+
+Layers: HTTP (main.py) -> logic (guard.py, matching.py) -> data (repo.py). Writes need an X-API-Key header.
+
+    $ curl -X POST localhost:8000/posts/1/suggestions            (no key)
+    HTTP 401
+    $ curl -X POST -H "X-API-Key: ..." localhost:8000/posts/1/suggestions
+     id 1 rank 1 fox_10.jpg accepted
+     id 2 rank 2 fox_6.jpg accepted
+     id 3 rank 3 fox_02.jpg accepted
+     id 4 rank 4 fox_8.jpg accepted
+     id 5 rank 5 fox_4.jpg accepted
+    approve rank 1 -> fox_10.jpg approved - clear fox photo
+    reject rank 2  -> fox_6.jpg rejected - fox is partly hidden
+    same approval again -> HTTP 200 (idempotent: one review row per suggestion)
+    after re-running matching, both reviews are still there:
+      1 fox_10.jpg guard: accepted review: approved
+      2 fox_6.jpg guard: accepted review: rejected
+      3 fox_02.jpg guard: accepted review: None
+
+Guard cannot be silently overridden: approving a pair the guard rejected is refused.
+
+    $ curl -X POST ... -d '{"decision":"approved"}' localhost:8000/suggestions/<eagle suggestion>/review
+    {"detail":"cannot approve: the guard rejected this pair [category] category mismatch: article is about other ('bald eagle'), image shows fox ('red fox')"}
+    HTTP 409
+
+Input validation: GET /posts/abc/images -> 422, GET /posts/9999/images -> 404, review decision "maybe" -> 422.
+
+Probe 4, a post with nothing suitable (eagles):
+
+    no_confident_match - No confident match found. Every top candidate was rejected (category, subject).
+
+Probe 6, the cost log (GET /costs), every AI call attributed:
+
+    article_analysis api_error calls 20 est $ 0.0
+    article_analysis ok calls 36 est $ 0.0423
+    article_embedding ok calls 36 est $ 0.0003
+    image_embedding ok calls 53 est $ 0.0002
+    vision api_error calls 53 est $ 0.0
+    vision ok calls 53 est $ 0.0955
+    vision validation_error calls 7 est $ 0.0098
+    TOTAL calls 258 est $ 0.148155   (estimated at list price; actual spend is $0 on the free tier)
+
+## Phase 4: budget guard, probe 2 and automated tests
+
+Budget guard (cost requirement): before every AI call the code adds up the logged cost in ai_calls and refuses to
+continue once it reaches MAX_BUDGET_USD (default 1.0). Demo with a tiny cap; the check runs before the API call,
+so no call was made:
+
+    $ MAX_BUDGET_USD=0.01 python -m scripts.run_vision_batch --limit 1
+    Model: gemini-3.5-flash
+    STOPPED by the budget guard: estimated spend $0.1482 has reached the budget $0.01
+
+Probe 2, the fox post against other animals (python -m scripts.check_pair):
+
+    best fox photos for the post:  fox_10.jpg 0.850, fox_6.jpg 0.840, fox_02.jpg 0.839 (accepted)
+    wolf_01.jpg  similarity 0.764  REJECTED [category]
+    bear_01.jpg  similarity 0.736  REJECTED [category]
+    dog_01.jpg   similarity 0.713  REJECTED [category]
+
+The wolf scores above the 0.74 similarity threshold, so only the category rule keeps it out.
+
+Automated tests (tests/test_schema.py, test_guard.py, test_matching.py, test_budget.py, test_api.py). They cover
+schema validation of model output, mismatch rejection, ranking and refusal with synthetic vectors, the budget guard,
+API behaviour (422, 404, 401, 409) and the eval headline precision staying at or above 90%:
+
+    $ python -m pytest -q
+    37 passed, 1 warning in 1.08s

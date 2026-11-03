@@ -7,7 +7,7 @@ import psycopg
 from google.genai import errors, types
 
 from app.config import Settings
-from app.costs import log_call
+from app.costs import check_budget, log_call
 from app.vision import RETRYABLE
 
 
@@ -26,6 +26,7 @@ def embed_text(conn: psycopg.Connection, client, settings: Settings, text: str, 
     cost = est_tokens * settings.embedding_input_rate / 1_000_000
     last_error = "no attempt was made"
     for attempt in range(1, 4):
+        check_budget(conn, settings)
         started = time.time()
         try:
             result = client.models.embed_content(

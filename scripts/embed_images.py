@@ -7,6 +7,7 @@ from google import genai
 from google.genai import types
 
 from app.config import get_settings
+from app.costs import BudgetExceeded
 from app.db import connect
 from app.embeddings import embed_text
 
@@ -55,4 +56,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except BudgetExceeded as exc:
+        raise SystemExit(f"STOPPED by the budget guard: {exc}")

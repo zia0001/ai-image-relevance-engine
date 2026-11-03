@@ -8,7 +8,7 @@ from google.genai import errors, types
 from pydantic import ValidationError
 
 from app.config import Settings
-from app.costs import log_call
+from app.costs import check_budget, log_call
 from app.prompts import IMAGE_PROMPT
 from app.schemas.image_analysis import ImageAnalysis
 
@@ -51,6 +51,7 @@ def analyze_image(conn: psycopg.Connection, client, settings: Settings, image: d
 
     last_error = "no attempt was made"
     for attempt in range(1, settings.max_attempts + 1):
+        check_budget(conn, settings)
         started = time.time()
         try:
             response = client.models.generate_content(

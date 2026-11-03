@@ -7,7 +7,7 @@ from google.genai import errors, types
 from pydantic import ValidationError
 
 from app.config import Settings
-from app.costs import log_call
+from app.costs import check_budget, log_call
 from app.prompts import ARTICLE_PROMPT
 from app.schemas.article_analysis import ArticleAnalysis
 from app.vision import RETRYABLE, _ms, retry_delay_seconds
@@ -18,6 +18,7 @@ def analyze_article(conn: psycopg.Connection, client, settings: Settings, articl
     prompt = f"{ARTICLE_PROMPT}\n\nTitle: {article['title']}\n\n{article['body']}"
     last_error = "no attempt was made"
     for attempt in range(1, settings.max_attempts + 1):
+        check_budget(conn, settings)
         started = time.time()
         try:
             response = client.models.generate_content(
