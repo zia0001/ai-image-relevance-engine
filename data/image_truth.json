@@ -210,5 +210,13 @@
   "wolf_9.jpg": {
     "category": "wolf",
     "subject": "gray wolf"
+  },
+  "dog_04.jpg": {
+    "category": "dog",
+    "subject": "duck tolling retriever"
+  },
+  "fox_01.jpg": {
+    "category": "fox",
+    "subject": "red fox"
   }
 }

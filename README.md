@@ -49,7 +49,7 @@ If no candidate in the top 5 passes, the answer is "no confident match" plus the
 ## Results (python -m scripts.run_eval)
 
 Human ground truth: article labels written by hand before results were seen, image labels reviewed by eye.
-36 articles (24 have a correct image, 12 have none), 53 images.
+36 articles (24 have a correct image, 12 have none), 55 images.
 
 - Top-1 precision (right outcome on all articles): 97.2% (24 right images + 11 right refusals)
 - Precision of returned matches: 96.0%, recall 100%, correct refusals 11 of 12
@@ -100,7 +100,7 @@ Failed images are retried by running the same command again.
 
 ## Limitations
 
-- The eval set is small (36 articles, 53 images) and the articles are short synthetic texts written for the eval,
+- The eval set is small (36 articles, 55 images) and the articles are short synthetic texts written for the eval,
   not real blog posts. The precision number shows the method works, not that it would hold at scale.
 - One known false accept: a mixed article about coyotes and wolves matched a coyote photo. The model gave it
   confidence 0.90 although the prompt asks for a low score when several animals appear.

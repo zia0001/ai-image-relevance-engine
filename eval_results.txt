@@ -1,4 +1,4 @@
-EVAL SET: 36 articles (24 have a correct image, 12 have none), 53 images
+EVAL SET: 36 articles (24 have a correct image, 12 have none), 55 images
 
 HEADLINE TOP-1 PRECISION (brief definition: share of ALL 36 articles with the right outcome): 97.2%  (24 right images + 11 right refusals)
 
@@ -30,8 +30,8 @@ THRESHOLD SWEEP
   0.70  returned=25  correct=24  precision=96.0%  recall=100.0%  refused_none=11/12
   0.74  returned=25  correct=24  precision=96.0%  recall=100.0%  refused_none=11/12
   0.76  returned=25  correct=24  precision=96.0%  recall=100.0%  refused_none=11/12
-  0.77  returned=23  correct=22  precision=95.7%  recall=91.7%  refused_none=11/12
-  0.78  returned=21  correct=20  precision=95.2%  recall=83.3%  refused_none=11/12
+  0.77  returned=24  correct=23  precision=95.8%  recall=95.8%  refused_none=11/12
+  0.78  returned=22  correct=21  precision=95.5%  recall=87.5%  refused_none=11/12
   0.79  returned=19  correct=18  precision=94.7%  recall=75.0%  refused_none=11/12
   0.80  returned=16  correct=15  precision=93.8%  recall=62.5%  refused_none=11/12
   0.82  returned=10  correct=10  precision=100.0%  recall=41.7%  refused_none=12/12

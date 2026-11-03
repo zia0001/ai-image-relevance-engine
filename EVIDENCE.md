@@ -264,7 +264,8 @@ Findings:
 
 ## Updates to earlier sections
 - The Category enum later gained "other" (the Phase 1 enum error text above predates that).
-- Images 54 seeded, 53 labelled: dog_04 and fox_01 failed on repeated Gemini 503 overload and are excluded from the eval.
+- Images 54 seeded, 53 labelled: dog_04 and fox_01 failed on repeated Gemini 503 overload and were excluded from the eval at this point.
+- Later update (2026-11-03): both images were retried successfully, embedded, and labelled by hand (dog_04 is a dog, fox_01 is a fox). The eval now covers all 55 images and the headline is unchanged at 97.2%. Sections above this line are snapshots from earlier runs; the current status is in 'Progress tracking' and eval_results.txt.
 
 ## Phase 4: review API (app/main.py, app/repo.py, db/migrations/006_reviews_and_indexes.sql)
 
@@ -354,22 +355,14 @@ The article "Vulpes vulpes: the secretive canid of hedgerows" never says "fox" i
 
 ## Progress tracking (GET /images/status)
 
+After retrying the two images that had failed on 503 overloads, all 55 are done:
+
     {
         "total": 55,
         "counts": {
-            "done": 53,
-            "failed": 2
+            "done": 55
         },
-        "failed": [
-            {
-                "filename": "dog_04.jpg",
-                "last_error": null
-            },
-            {
-                "filename": "fox_01.jpg",
-                "last_error": "503: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
-            }
-        ]
+        "failed": []
     }
 
 ## Final test run
